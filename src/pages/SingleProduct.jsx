@@ -14,24 +14,22 @@ const SingleProduct = () => {
   const { id } = useParams();
   const { cartList, setCartList } = useContext(Context);
 
-  const [singleProduct, setSingleProduct] = useState(null); // Start with null
+  const [singleProduct, setSingleProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(0); // Default quantity is 0
+  const [quantity, setQuantity] = useState(0); 
 
-  // Function to get product data
   useEffect(() => {
     async function fetchProduct() {
       try {
         const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
         const productData = response.data;
 
-        // Check if the product exists in the cart
         const productInCart = cartList.find((product) => product.id === productData.id);
         if (productInCart) {
-          setQuantity(productInCart.quantity); // Sync quantity if product is in cart
+          setQuantity(productInCart.quantity); 
         }
 
-        setSingleProduct(productData); // Set API data
+        setSingleProduct(productData); 
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -39,12 +37,11 @@ const SingleProduct = () => {
       }
     }
     fetchProduct();
-  }, [id, cartList]); // Re-run if `id` or `cartList` changes
+  }, [id, cartList]); 
 
-  // Handle adding or updating cart
+
   const handleAddToCart = () => {
     if (quantity === 0) {
-      // Remove from cart if quantity is 0
       setCartList(cartList.filter((product) => product.id !== singleProduct.id));
     } else {
       const updatedCart = cartList.find((product) => product.id === singleProduct.id)
@@ -59,7 +56,6 @@ const SingleProduct = () => {
     }
   };
 
-  // Calculate discount based on price
   const discount = singleProduct?.price > 50 ? singleProduct?.price * 2 : singleProduct?.price * 1.5;
 
   if (loading || !singleProduct) {
