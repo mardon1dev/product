@@ -107,7 +107,7 @@ const SingleProduct = () => {
           <h2 className="text-3xl font-bold">{singleProduct.title}</h2>
           <p className="mt-5">{singleProduct.description}</p>
           <div className="mt-5 flex items-center space-x-5">
-            <div className="w-[60px] h-[60px] border-[1px] border-[#000] rounded-lg bg-[#000]/20 flex items-center justify-center">
+            <div className="w-[60px] px-4 border-[1px] border-[#000] rounded-lg bg-[#000]/20 flex items-center justify-center">
               <p className="text-2xl font-bold">${singleProduct.price}</p>
             </div>
             <div>
